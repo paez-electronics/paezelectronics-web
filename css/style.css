@@ -87,7 +87,7 @@ a {
 /* BOTONES Y CTAs */
 /* ========================================================= */
 
-.btn-cotizar, .btn-primario, .btn-secundario {
+.btn-cotizar, .btn-primario, .btn-secundario, .btn-cotizar-nav-movil {
     display: inline-block;
     padding: 16px 40px; 
     border-radius: 6px; 
@@ -100,13 +100,14 @@ a {
     letter-spacing: 1px;
 }
 
-.btn-cotizar {
+/* ESTILO DEL BOTÓN DE ESCRITORIO Y EL DE MÓVIL */
+.btn-cotizar, .btn-cotizar-nav-movil {
     background: var(--color-secundario);
     color: var(--color-terciario);
     box-shadow: 0 4px 10px rgba(24, 113, 172, 0.4); 
 }
 
-.btn-cotizar:hover {
+.btn-cotizar:hover, .btn-cotizar-nav-movil:hover {
     background: var(--color-primario); 
     color: var(--color-terciario); 
     transform: translateY(-2px);
@@ -156,7 +157,7 @@ a {
 }
 
 .logo-img {
-    max-height: 45px; 
+    max-height: 45px; /* Valor original de escritorio */
     width: auto;
     display: block;
 }
@@ -181,6 +182,12 @@ a {
     color: var(--color-secundario);
     border-bottom: 3px solid var(--color-secundario); 
 }
+
+/* OCULTAMOS EL ITEM DE COTIZAR MÓVIL EN ESCRITORIO */
+.nav-cotizar-item-movil {
+    display: none; 
+}
+
 
 /* ========================================================= */
 /* 1.1 ÍCONO DE MENÚ (HAMBURGUESA) - Estilos Base */
@@ -463,9 +470,34 @@ footer .container {
     .encabezado-principal {
         padding: 15px 20px;
     }
+
+    /* === MODIFICACIONES SOLO EN MÓVIL === */
+
+    /* 1. LOGO MÁS PEQUEÑO EN MÓVIL */
+    .logo-img {
+        max-height: 35px; 
+    }
+    
+    /* 2. MOSTRAR ITEM DE COTIZAR MÓVIL Y ESTILIZARLO */
+    .nav-cotizar-item-movil {
+        display: block; /* Hacemos visible el item */
+        padding: 20px 0; 
+    }
+
+    .nav-cotizar-item-movil a.btn-cotizar-nav-movil {
+        width: 90%; 
+        margin: 0 auto;
+        display: block;
+        padding: 12px 20px; 
+    }
+    
+    /* 3. OCULTAR BOTÓN COTIZAR DE ESCRITORIO (lo manejamos con JS, pero añadimos la regla para seguridad) */
+    .btn-cotizar {
+        display: none;
+    }
     
     /* ------------------------------------------------ */
-    /* MENÚ RESPONSIVE: Mostrar botón y ocultar menú por defecto */
+    /* MENÚ RESPONSIVE: Mostrar botón y funcionalidad */
     /* ------------------------------------------------ */
     
     .menu-toggle {
@@ -475,20 +507,20 @@ footer .container {
     .navegacion-principal {
         /* Estado por defecto: Oculto (fuera de pantalla) */
         position: fixed;
-        top: 75px; /* Altura aproximada del encabezado. Ajusta si es necesario */
+        top: 65px; /* Altura ajustada del encabezado. */
         left: 0;
         width: 100%;
-        height: 100vh; /* Para cubrir toda la pantalla */
+        height: 100vh; 
         background: var(--fondo-oscuro-base); 
-        transform: translateX(-100%); /* Desplazar fuera de la vista */
+        transform: translateX(-100%); 
         transition: transform 0.4s ease-in-out;
         z-index: 999; 
-        overflow-y: auto; /* Para que el menú sea scrollable si hay muchos ítems */
+        overflow-y: auto; 
     }
 
     /* Clase que se activa con JavaScript para mostrar el menú */
     .navegacion-principal.menu-activo {
-        transform: translateX(0); /* Desplazar a la vista */
+        transform: translateX(0); 
     }
 
     .navegacion-principal ul {
@@ -498,36 +530,35 @@ footer .container {
     }
 
     .navegacion-principal ul li a {
-        padding: 18px 25px; /* Más espacio para facilitar el toque */
+        padding: 18px 25px; 
         text-align: center;
         border-bottom: 1px solid var(--fondo-oscuro-superficie); 
         font-size: 1.1em;
     }
 
     .navegacion-principal ul li a:hover, .navegacion-principal ul li a.active {
-        border-bottom: none; /* Eliminar el borde inferior que es para desktop */
+        border-bottom: none; 
         background-color: var(--fondo-oscuro-superficie);
     }
 
     /* ------------------------------------------------ */
-    /* Animación de la Hamburguesa a "X" (Usando la misma clase: menu-activo) */
+    /* Animación de la Hamburguesa a "X" */
     /* ------------------------------------------------ */
     .menu-toggle.menu-activo .bar:nth-child(2) {
-        opacity: 0; /* Oculta la barra del medio */
+        opacity: 0; 
     }
 
     .menu-toggle.menu-activo .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg); /* Gira y mueve la primera barra */
+        transform: translateY(8px) rotate(45deg); 
     }
 
     .menu-toggle.menu-activo .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg); /* Gira y mueve la tercera barra */
+        transform: translateY(-8px) rotate(-45deg); 
     }
-    
+
     /* ------------------------------------------------ */
     /* Otros ajustes responsive */
     /* ------------------------------------------------ */
-
     .seccion-portada {
         min-height: 450px;
     }

@@ -22,12 +22,18 @@
             <span class="bar"></span>
             <span class="bar"></span>
         </button>
+
         <nav class="navegacion-principal">
             <ul>
                 <li><a href="html/marcas.html">Marcas</a></li>
                 <li><a href="html/contacto.html">Contacto</a></li>
-                </ul>
+                
+                <li class="nav-cotizar-item-movil">
+                    <a href="html/cotizar.html" class="btn-cotizar-nav-movil">Cotizar</a>
+                </li>
+            </ul>
         </nav>
+        
         <a href="html/cotizar.html" class="btn-cotizar">Cotizar</a>
     </header>
 
@@ -125,38 +131,41 @@
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.querySelector('.navegacion-principal');
             const navLinks = navMenu.querySelectorAll('a');
-            const btnCotizarHeader = document.querySelector('.btn-cotizar'); // Botón de Cotizar en el header
-
-            // Función para alternar las clases (abrir/cerrar menú)
+            const btnCotizarHeader = document.querySelector('.encabezado-principal > .btn-cotizar'); // Botón de escritorio
+            
             const toggleMenu = () => {
                 navMenu.classList.toggle('menu-activo');
                 menuToggle.classList.toggle('menu-activo');
-                // Opcional: Ocultar el botón Cotizar de escritorio cuando el menú móvil está abierto
-                // Si quieres que el botón "Cotizar" desaparezca para evitar duplicidad:
-                if (navMenu.classList.contains('menu-activo')) {
-                    btnCotizarHeader.style.display = 'none';
-                } else {
-                    btnCotizarHeader.style.display = ''; // Vuelve al estado por defecto (CSS lo manejará)
+                
+                // Ocultar el botón Cotizar de escritorio cuando el menú móvil está abierto
+                if (window.innerWidth <= 900) {
+                    if (navMenu.classList.contains('menu-activo')) {
+                        btnCotizarHeader.style.display = 'none';
+                    } else {
+                        btnCotizarHeader.style.display = 'inline-block'; // Mostrar el botón al cerrar
+                    }
                 }
             };
 
-            // 1. Manejar el clic en el botón de hamburguesa
             menuToggle.addEventListener('click', toggleMenu);
 
-            // 2. Cerrar el menú al hacer clic en un enlace (navegación)
             navLinks.forEach(link => {
-                link.addEventListener('click', toggleMenu); // Usa la misma función para cerrar
+                link.addEventListener('click', toggleMenu); 
             });
 
-            // 3. Cerrar el menú al cambiar el tamaño de la ventana (desktop view)
             window.addEventListener('resize', () => {
                 if (window.innerWidth > 900) {
                     navMenu.classList.remove('menu-activo');
                     menuToggle.classList.remove('menu-activo');
-                    btnCotizarHeader.style.display = '';
+                    btnCotizarHeader.style.display = 'inline-block'; // Asegurar que el botón de escritorio se vea
+                } else {
+                    // Si se redimensiona a móvil, y el menú NO está activo, aseguramos que el botón de escritorio se vea.
+                    if (!navMenu.classList.contains('menu-activo')) {
+                        btnCotizarHeader.style.display = 'inline-block';
+                    }
                 }
             });
         });
     </script>
-    </body>
+</body>
 </html>
