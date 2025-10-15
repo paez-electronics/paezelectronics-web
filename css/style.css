@@ -567,12 +567,11 @@ footer .container {
         margin-bottom: 30px;
     }
     
-    /* Ajuste para que los enlaces de pie centren el texto */
     .pie-enlaces a {
         text-align: center;
     }
     
     .pie-social a {
-        margin: 0 10px; /* Centrar íconos */
+        margin: 0 10px; 
     }
 }
