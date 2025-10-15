@@ -137,12 +137,12 @@
                 navMenu.classList.toggle('menu-activo');
                 menuToggle.classList.toggle('menu-activo');
                 
-                // Ocultar el botón Cotizar de escritorio cuando el menú móvil está abierto
+                // === LÓGICA CLAVE PARA OCULTAR BOTÓN DE ESCRITORIO EN MÓVIL ===
                 if (window.innerWidth <= 900) {
                     if (navMenu.classList.contains('menu-activo')) {
-                        btnCotizarHeader.style.display = 'none';
+                        btnCotizarHeader.style.display = 'none'; // Ocultar si el menú está abierto
                     } else {
-                        btnCotizarHeader.style.display = 'inline-block'; // Mostrar el botón al cerrar
+                        btnCotizarHeader.style.display = 'none'; // Asegurar que siempre esté oculto en móvil
                     }
                 }
             };
@@ -157,14 +157,16 @@
                 if (window.innerWidth > 900) {
                     navMenu.classList.remove('menu-activo');
                     menuToggle.classList.remove('menu-activo');
-                    btnCotizarHeader.style.display = 'inline-block'; // Asegurar que el botón de escritorio se vea
+                    btnCotizarHeader.style.display = 'inline-block'; // Mostrar en escritorio
                 } else {
-                    // Si se redimensiona a móvil, y el menú NO está activo, aseguramos que el botón de escritorio se vea.
-                    if (!navMenu.classList.contains('menu-activo')) {
-                        btnCotizarHeader.style.display = 'inline-block';
-                    }
+                    btnCotizarHeader.style.display = 'none'; // Ocultar en móvil
                 }
             });
+            
+            // Inicialización: Asegurar que el botón de escritorio esté oculto al cargar la página en móvil
+            if (window.innerWidth <= 900) {
+                 btnCotizarHeader.style.display = 'none';
+            }
         });
     </script>
 </body>

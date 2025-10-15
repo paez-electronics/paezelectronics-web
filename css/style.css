@@ -478,7 +478,12 @@ footer .container {
         max-height: 35px; 
     }
     
-    /* 2. MOSTRAR ITEM DE COTIZAR MÓVIL Y ESTILIZARLO */
+    /* 2. OCULTAR BOTÓN COTIZAR DE ESCRITORIO */
+    .btn-cotizar {
+        display: none;
+    }
+    
+    /* 3. MOSTRAR ITEM DE COTIZAR MÓVIL Y ESTILIZARLO */
     .nav-cotizar-item-movil {
         display: block; /* Hacemos visible el item */
         padding: 20px 0; 
@@ -491,13 +496,8 @@ footer .container {
         padding: 12px 20px; 
     }
     
-    /* 3. OCULTAR BOTÓN COTIZAR DE ESCRITORIO (lo manejamos con JS, pero añadimos la regla para seguridad) */
-    .btn-cotizar {
-        display: none;
-    }
-    
     /* ------------------------------------------------ */
-    /* MENÚ RESPONSIVE: Mostrar botón y funcionalidad */
+    /* MENÚ RESPONSIVE: Despliegue de DERECHA a IZQUIERDA */
     /* ------------------------------------------------ */
     
     .menu-toggle {
@@ -505,14 +505,18 @@ footer .container {
     }
 
     .navegacion-principal {
-        /* Estado por defecto: Oculto (fuera de pantalla) */
+        /* Estado por defecto: Oculto (fuera de pantalla a la DERECHA) */
         position: fixed;
-        top: 65px; /* Altura ajustada del encabezado. */
-        left: 0;
+        top: 65px; 
+        right: 0; /* Ancla a la derecha */
+        left: auto; /* Desactiva anclaje izquierdo */
         width: 100%;
         height: 100vh; 
         background: var(--fondo-oscuro-base); 
-        transform: translateX(-100%); 
+        
+        /* DESPLIEGUE CLAVE: Comienza 100% fuera de la derecha */
+        transform: translateX(100%); 
+        
         transition: transform 0.4s ease-in-out;
         z-index: 999; 
         overflow-y: auto; 
@@ -520,11 +524,12 @@ footer .container {
 
     /* Clase que se activa con JavaScript para mostrar el menú */
     .navegacion-principal.menu-activo {
+        /* Se mueve a la posición 0 (visible) */
         transform: translateX(0); 
     }
 
     .navegacion-principal ul {
-        flex-direction: column; /* Apilar los ítems verticalmente */
+        flex-direction: column; 
         padding: 20px 0;
         align-items: stretch;
     }
@@ -542,7 +547,7 @@ footer .container {
     }
 
     /* ------------------------------------------------ */
-    /* Animación de la Hamburguesa a "X" */
+    /* Animación de la Hamburguesa a "X" (sin cambios) */
     /* ------------------------------------------------ */
     .menu-toggle.menu-activo .bar:nth-child(2) {
         opacity: 0; 
