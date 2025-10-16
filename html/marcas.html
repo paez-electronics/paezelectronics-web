@@ -150,20 +150,18 @@
             const menuToggle = document.querySelector('.menu-toggle');
             const navMenu = document.querySelector('.navegacion-principal');
             const navLinks = navMenu.querySelectorAll('a');
-            const body = document.body; // Referencia al cuerpo para el scroll
+            const body = document.body;
 
             const toggleMenu = () => {
                 navMenu.classList.toggle('menu-activo');
                 menuToggle.classList.toggle('menu-activo');
-                body.classList.toggle('no-scroll'); // Bloquea el scroll al abrir
+                body.classList.toggle('no-scroll'); 
             };
 
             menuToggle.addEventListener('click', toggleMenu);
 
-            // Cierra el menú al hacer clic en un enlace (y quita el bloqueo de scroll)
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
-                    // Solo si el menú está activo, lo cerramos
                     if (navMenu.classList.contains('menu-activo')) {
                          navMenu.classList.remove('menu-activo');
                          menuToggle.classList.remove('menu-activo');
@@ -172,12 +170,11 @@
                 });
             });
 
-            // Lógica para manejar el resize (necesaria para desktop)
             window.addEventListener('resize', () => {
-                if (window.innerWidth > 768) { // Punto de corte CSS: 768px
+                if (window.innerWidth > 768) {
                     navMenu.classList.remove('menu-activo');
                     menuToggle.classList.remove('menu-activo');
-                    body.classList.remove('no-scroll'); // Asegura que el scroll vuelve en desktop
+                    body.classList.remove('no-scroll');
                 }
             });
         });
