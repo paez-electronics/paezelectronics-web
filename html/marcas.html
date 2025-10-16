@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nuestras Marcas | Paez Electronics</title>
     
-    <link rel="icon" type="image/png" href="../img/logo-icono.png"> 
+    <link rel="icon" type="image/png" href="../img/logo-icono.png">	
     
     <link rel="stylesheet" href="../css/style-marcas.css">
     
@@ -17,12 +17,23 @@
 
     <header class="encabezado-principal">
         <a href="../index.html" class="logo">
-            <img src="../img/logo-blanco.png" alt="Paez Electronics" class="logo-img"> 
-        </a> 
+            <img src="../img/logo-blanco.png" alt="Paez Electronics" class="logo-img">	
+        </a>	
+
+        <button class="menu-toggle" aria-label="Abrir menú de navegación">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
         <nav class="navegacion-principal">
             <ul>
                 <li><a href="marcas.html" class="active">Marcas</a></li>
                 <li><a href="contacto.html">Contacto</a></li>
+                
+                <li class="nav-cotizar-item-movil">
+                    <a href="cotizar.html" class="btn-cotizar-nav-movil">Cotizar</a>
+                </li>
             </ul>
         </nav>
         <a href="cotizar.html" class="btn-cotizar">Cotizar</a>
@@ -109,7 +120,7 @@
     </div>
 </section>
 
-    <footer id="pie-contacto"> 
+    <footer id="pie-contacto">	
         <div class="container">
             <div class="pie-info">
                 <h3>Paez Electronics LLC</h3>
@@ -119,7 +130,7 @@
                 <h4>Enlaces Rápidos</h4>
                 <ul>
                     <li><a href="marcas.html">Marcas</a></li>
-                    <li><a href="contacto.html">Contacto</a></li> 
+                    <li><a href="contacto.html">Contacto</a></li>	
                     <li><a href="cotizar.html">Cotizar</a></li>
                 </ul>
             </div>
@@ -134,5 +145,42 @@
         <p class="copyright">&copy; 2025 Paez Electronics. Todos los derechos reservados.</p>
     </footer>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggle = document.querySelector('.menu-toggle');
+            const navMenu = document.querySelector('.navegacion-principal');
+            const navLinks = navMenu.querySelectorAll('a');
+            const body = document.body; // Referencia al cuerpo para el scroll
+
+            const toggleMenu = () => {
+                navMenu.classList.toggle('menu-activo');
+                menuToggle.classList.toggle('menu-activo');
+                body.classList.toggle('no-scroll'); // Bloquea el scroll al abrir
+            };
+
+            menuToggle.addEventListener('click', toggleMenu);
+
+            // Cierra el menú al hacer clic en un enlace (y quita el bloqueo de scroll)
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    // Solo si el menú está activo, lo cerramos
+                    if (navMenu.classList.contains('menu-activo')) {
+                         navMenu.classList.remove('menu-activo');
+                         menuToggle.classList.remove('menu-activo');
+                         body.classList.remove('no-scroll');
+                    }
+                });
+            });
+
+            // Lógica para manejar el resize (necesaria para desktop)
+            window.addEventListener('resize', () => {
+                if (window.innerWidth > 768) { // Punto de corte CSS: 768px
+                    navMenu.classList.remove('menu-activo');
+                    menuToggle.classList.remove('menu-activo');
+                    body.classList.remove('no-scroll'); // Asegura que el scroll vuelve en desktop
+                }
+            });
+        });
+    </script>
 </body>
 </html>
